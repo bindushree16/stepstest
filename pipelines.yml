@@ -54,8 +54,8 @@ pipelines:
         type: image
         image:
           custom:
-            name: bindushree16/c7cpp
-            tag: cpptesting
+            name: bindu166/c7cpp
+            tag: cpptest
             options: " "   
     steps:
       - name: build_go
