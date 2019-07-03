@@ -65,7 +65,7 @@ pipelines:
           sourceLocation: .
           repository: test-go-local
           outputLocation: tmp
-          outputFile: hello
+          outputFile: bindu_go
           inputResources:
             - name: artifactory_go1
           integrations:
@@ -116,7 +116,7 @@ pipelines:
           dryRun: false
           description: "This is to test GoBuild -> PushArtifactoryPackage -> PublishBuildInfo -> Promote -> CreateRelease -> Sign -> Distribute pipeline chain"
           releaseBundleName: go_publish_test_build
-          releaseBundleVersion: v1.0.2
+          releaseBundleVersion: v1.0.3
           sign: false
           inputResources:
             - name: promoted_go_build1
