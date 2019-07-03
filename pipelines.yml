@@ -7,35 +7,35 @@ resources:
         include: master
       gitProvider: bindu_github
       
-  - name: go_build_info
+  - name: go_build_info1
     type: BuildInfo
     configuration:
       sourceArtifactory: art
       buildName: go_example_build
       buildNumber: 1
       
-  - name: unsigned_release_bundle_go
+  - name: unsigned_release_bundle_go1
     type: ReleaseBundle
     configuration:
       sourceDistribution: dist 
       name: go_test_bundle
       version: v1.16
       
-  - name: signed_release_bundle_go
+  - name: signed_release_bundle_go1
     type: ReleaseBundle
     configuration:
       sourceDistribution: dist 
       name: go_test_bundle
       version: v1.16
       
-  - name: promoted_go_build
+  - name: promoted_go_build1
     type: BuildInfo
     configuration:
       sourceArtifactory: art 
       buildName: promote_go_build_publish
       buildNumber: 1
       
-  - name: distribution_rule_go
+  - name: distribution_rule_go1
     type: DistributionRule
     configuration:
       sourceDistribution: dist
@@ -94,7 +94,7 @@ pipelines:
           inputSteps:
             - name: publish_go_binary
           outputResources:
-            - name: go_build_info
+            - name: go_build_info1
             
       - name: promote_build_go
         type: PromoteBuild
@@ -104,9 +104,9 @@ pipelines:
           integrations:
             - name: art
           inputResources:
-            - name: go_build_info
+            - name: go_build_info1
           outputResources:
-            - name: promoted_go_build
+            - name: promoted_go_build1
             
       - name: bundle_go_publish
         type: CreateReleaseBundle
@@ -118,25 +118,25 @@ pipelines:
           releaseBundleVersion: v1.17
           sign: false
           inputResources:
-            - name: promoted_go_build
+            - name: promoted_go_build1
           outputResources:
-            - name: unsigned_release_bundle_go
+            - name: unsigned_release_bundle_go1
             
       - name: sign_release_bundle_go
         type: SignReleaseBundle
         configuration:
           inputResources:
-            - name: unsigned_release_bundle_go
+            - name: unsigned_release_bundle_go1
           outputResources:
-            - name: signed_release_bundle_go
+            - name: signed_release_bundle_go1
             
       - name: distribute_signed_release_bundle
         type: DistributeReleaseBundle
         configuration:
           dryRun: false
           inputResources:
-            - name: signed_release_bundle_go
-            - name: distribution_rule_go
+            - name: signed_release_bundle_go1
+            - name: distribution_rule_go1
           integrations: 
             - name: dist          
             
