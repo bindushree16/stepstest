@@ -1,11 +1,11 @@
 resources:
-  - name: artifactory_go
+  - name: artifactory_go1
     type: GitRepo
     configuration:
-      path: vijayreddy1991/artifactory-go-example
+      path: bindushree16/artifactory-go-example
       branches:
         include: master
-      gitProvider: vijay_github
+      gitProvider: bindu_github
       
   - name: go_build_info
     type: BuildInfo
@@ -48,14 +48,14 @@ resources:
 
 
 pipelines:
-  - name: go_build
+  - name: go_build1
     configuration:   
       runtime:       
         type: image
         image:
           custom:
-            name: vijaydocker1991/u18node
-            tag: gotesting
+            name: bindushree16/c7cpp
+            tag: cpptesting
             options: " "   
     steps:
       - name: build_go
@@ -67,7 +67,7 @@ pipelines:
           outputLocation: tmp
           outputFile: hello
           inputResources:
-            - name: artifactory_go
+            - name: artifactory_go1
           integrations:
             - name: art
         execution:
