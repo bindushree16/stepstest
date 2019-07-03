@@ -76,6 +76,7 @@ pipelines:
             - sudo tar -C /usr/local -xzf go1.12.5.linux-amd64.tar.gz
             - export PATH=$PATH:/usr/local/go/bin
             - go version  
+            - jfrog --version
             
       - name: publish_go_binary
         type: GoPublishBinary
@@ -100,7 +101,7 @@ pipelines:
         type: PromoteBuild
         configuration:
           nodePool: ubuntu16        
-          targetRepository: test-go-local
+          targetRepository: promote-test
           integrations:
             - name: art
           inputResources:
@@ -115,7 +116,7 @@ pipelines:
           dryRun: false
           description: "This is to test GoBuild -> PushArtifactoryPackage -> PublishBuildInfo -> Promote -> CreateRelease -> Sign -> Distribute pipeline chain"
           releaseBundleName: go_publish_test_build
-          releaseBundleVersion: v1.0.1
+          releaseBundleVersion: v1.0.2
           sign: false
           inputResources:
             - name: promoted_go_build1
