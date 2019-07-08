@@ -2,7 +2,7 @@ resources:
  - name: gradle_repo
    type: GitRepo
    configuration:
-     gitProvider: github
+     gitProvider: vijay_github
      path: scriptnull/project-examples
      
  - name: build_info_gradle
