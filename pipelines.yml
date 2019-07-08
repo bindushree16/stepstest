@@ -135,12 +135,12 @@ pipelines:
          dryRun: false
          description: "from github.com/scriptnull/jp - develop - full-gradle-native.yml"
 
-releaseBundleName: release_bundle_gradle
+     - name: release_bundle_gradle
          releaseBundleVersion: v0.0.7
          sign: false
          inputResources:
            - name: promoted_build_info_gradle
-outputResources:
+         outputResources:
            - name: unsigned_release_bundle_gradle
          runtime:
            type: image
