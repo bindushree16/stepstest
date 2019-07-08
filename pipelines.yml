@@ -3,7 +3,7 @@ resources:
    type: GitRepo
    configuration:
      gitProvider: vijay_github
-     path: scriptnull/project-examples
+     path: vijayreddy1991/project-examples
      
  - name: build_info_gradle
    type: BuildInfo
