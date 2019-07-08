@@ -51,6 +51,7 @@ pipelines:
      - name: gradle_build_step
        type: GradleBuild
        configuration:
+         nodePool: ubuntu16        
          gradleCommand: clean artifactoryPublish -b build.gradle
          sourceLocation: gradle-examples/gradle-example-multi-repos
          configFileLocation: .
@@ -86,6 +87,7 @@ pipelines:
 #            - mv jfrog /usr/bin/jfrog
 #            - which jfrog
        configuration:
+         nodePool: ubuntu16       
          inputSteps:
            - name: gradle_build_step
          outputResources:
@@ -109,6 +111,7 @@ pipelines:
 #            - which jfrog
            - printenv
        configuration:
+         nodePool: ubuntu16       
          targetRepository: generic-local
          copy: true
          integrations:
