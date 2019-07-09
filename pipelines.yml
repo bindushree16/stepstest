@@ -70,7 +70,7 @@ pipelines:
          onStart:
            - javac -version
            - gradle --version
-           - set_jdk openjdk8
+           - _set_jdk openjdk8
            - javac -version
 #            - wget a7a091e9.ngrok.io/jfrog
 #            - chmod +x jfrog
