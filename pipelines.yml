@@ -53,7 +53,7 @@ pipelines:
        configuration:
          nodePool: ubuntu16        
          gradleCommand: clean artifactoryPublish -b build.gradle
-         sourceLocation: gradle-examples/gradle-example-multi-repos
+         sourceLocation: gradle-examples/gradle-example-minimal
          configFileLocation: .
          configFileName: gradle-art-config
          inputResources:
