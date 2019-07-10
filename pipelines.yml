@@ -72,22 +72,22 @@ pipelines:
            - gradle --version
            - _set_jdk openjdk8
            - javac -version
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
-#            - which jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
+           - which jfrog
            
      - name: publish_build_info_gradle
        type: PublishBuildInfo
        execution:
          onStart:
            - printenv
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
-#            - which jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
+           - which jfrog
        configuration:
          nodePool: ubuntu16       
          inputSteps:
@@ -106,11 +106,11 @@ pipelines:
        type: PromoteBuild
        execution:
          onStart:
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
-#            - which jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
+           - which jfrog
            - printenv
        configuration:
          nodePool: ubuntu16       
@@ -133,10 +133,10 @@ pipelines:
        type: CreateReleaseBundle # needs admin access permission in JFrog Artifactory
        execution:
          onStart:
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
            - which jfrog
        configuration:
          dryRun: false
@@ -161,10 +161,10 @@ pipelines:
        type: SignReleaseBundle
        execution:
          onStart:
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
            - which jfrog
        configuration:
          inputResources:
@@ -182,10 +182,10 @@ pipelines:
        type: DistributeReleaseBundle
        execution:
          onStart:
-#            - wget a7a091e9.ngrok.io/jfrog
-#            - chmod +x jfrog
-#            - sudo rm /usr/bin/jfrog
-#            - mv jfrog /usr/bin/jfrog
+           - wget http://833c7dee.ngrok.io/jfrog
+           - chmod +x jfrog
+           - sudo rm /usr/bin/jfrog
+           - mv jfrog /usr/bin/jfrog
            - which jfrog
        configuration:
          dryRun: false
