@@ -25,7 +25,7 @@ resources:
    configuration:
      sourceDistribution: dist
      name: unsigned_release_bundle_gradle
-     version: v3.0.0
+     version: v4.0.0
      isSigned: false
      
  - name: signed_release_bundle_gradle
@@ -33,7 +33,7 @@ resources:
    configuration:
      sourceDistribution: dist
      name: signed_release_bundle_gradle
-     version: v3.0.0
+     version: v4.0.0
      isSigned: true
      
  - name: distribution_rule_gradle
