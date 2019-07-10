@@ -4,7 +4,7 @@ resources:
    configuration:
      gitProvider: vijay_github
      path: vijayreddy1991/project-examples
-       commit: false     
+        commit: false     
      
  - name: build_info_gradle
    type: BuildInfo
