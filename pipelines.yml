@@ -143,7 +143,7 @@ pipelines:
          description: "from github.com/scriptnull/jp - develop - full-gradle-native.yml"
 
          releaseBundleName: test-gradle-local 
-         releaseBundleVersion: v3.0.0
+         releaseBundleVersion: v4.0.0
          sign: false
          inputResources:
            - name: promoted_build_info_gradle
