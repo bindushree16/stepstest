@@ -1,35 +1,31 @@
 resources:
-  - name: mvn_repo1
+  - name: maven_repo
     type: GitRepo
     configuration:
-      gitProvider: varsha_bbs
-      path: KER/project-examples
- 
-  - name: script_repo1
-    type: GitRepo
-    configuration:
-      gitProvider: varsha_bbs
-      path: KER/sample-script
+      gitProvider: vijay_github
+      path: vijayreddy1991/project-examples
     branches:
-      include: master
+      include: maven
+
   - name: maven
     type: BuildInfo
     configuration:
       sourceArtifactory: art
-      buildName: mvn_sample_build_varsha
+      buildName: maven
       buildNumber: 9
+      
   - name: maven_info
     type: BuildInfo
     configuration:
       sourceArtifactory: art
-      buildName: mvn_scan_varsha
+      buildName: maven_scan
       buildNumber: 2
       
   - name: maven_promoted
     type: BuildInfo
     configuration:
       sourceArtifactory: art
-      buildName: mvn_promote_build_varsha
+      buildName: maven_promote
       buildNumber: 3
       
   - name: unsigned_mvn_release_bundle
@@ -61,100 +57,11 @@ resources:
 
       
 pipelines:
-  - name: varshabash
+            
+  - name: maven_vijay
     steps:
-      - name: testReport_u16
-        type: Bash
-        configuration:
-          nodePool: ubuntu16
-          inputResources:
-            - name: script_repo1
-         # runtime: 
-          #  type: image
-            #image:
-             # auto:
-             #   language: java
-             #   versions:
-             #     - openjdk8
-              #custom:
-              #  name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
-              #  tag: 0.9.0 #master #
-        execution:
-          onExecute:
-            - printenv
-            - cd $res_script_repo1_resourcePath
-            - python -m py_compile calc.py
-            - sleep 20
-            - pip install pytest
-            - cd $res_script_repo1_resourcePath            
-            - py.test --verbose --junit-xml test-reports/results.xml test_calc.py
-            - save_tests $res_script_repo1_resourcePath/test-reports/results.xml     
-      
-      - name: testReport_u18
-        type: Bash
-        configuration:
-          inputResources:
-            - name: script_repo1
-        execution:
-          onExecute:
-            - printenv
-            - cd $res_script_repo1_resourcePath
-            - python -m py_compile calc.py
-            - sleep 20
-            - pip install pytest
-            - cd $res_script_repo1_resourcePath            
-            - py.test --verbose --junit-xml test-reports/results.xml test_calc.py
-            - save_tests $res_script_repo1_resourcePath/test-reports/results.xml   
             
-      - name: testReport_c7
-        type: Bash
-        configuration:
-          nodePool: bharath_c7
-          inputResources:
-            - name: script_repo1
-        execution:
-          onExecute:
-            - printenv
-            - cd $res_script_repo1_resourcePath
-            - python -m py_compile calc.py
-            - sleep 20
-            - pip install pytest
-            - cd $res_script_repo1_resourcePath            
-            - py.test --verbose --junit-xml test-reports/results.xml test_calc.py
-            - save_tests $res_script_repo1_resourcePath/test-reports/results.xml   
-            
-  - name: varshamvn
-    steps:
-      - name: input_script_bash
-        type: Bash
-        configuration:
-          nodePool: ubuntu16
-          inputResources:
-            - name: script_repo1
-          runtime: 
-            type: image
-            image:
-             # auto:
-             #   language: java
-             #   versions:
-             #     - openjdk8
-              custom:
-                name: pipelines-docker.jfrog.io/jfrog/pipelines-u16java
-                tag: 0.9.0
-        execution:
-          onExecute:
-            - printenv
-            - echo $test
-            - echo $ribbit
-            - pushd $res_script_repo1_resourcePath
-            - source example.env
-            - echo ~
-            - ./echo.sh
-            - echo $test
-            - echo $ribbit
-            - popd
-            
-      - name: mvnBuild_sample
+      - name: mavenvnBuild
         type: MvnBuild
         configuration:
           nodePool: ubuntu16
@@ -164,11 +71,8 @@ pipelines:
           configFileName: mvn-art-config
           inputResources:
             - name: mvn_repo1
-          inputSteps:
-            - name: input_script_bash
           integrations:
-            - name: varsha_artifactory
-            - name: varsha_slack
+            - name: art
           runtime:            
             type: image
             image:
@@ -189,29 +93,26 @@ pipelines:
             - javac -version
             - mvn --version
           onSuccess:
-            - send_notification varsha_slack
+            - echo "vijay"
             
-      - name: mvnBuild_publish
+      - name: mavenBuild_publish
         type: PublishBuildInfo
         configuration:
           nodePool: ubuntu16
-          integrations:
-            - name: varsha_slack
           inputSteps:
-            - name: mvnBuild_sample
+            - name: mavenBuild_sample
           outputResources:
-            - name: mvnBuild_info
+            - name: maven
         execution:
           onSuccess:
-            - send_notification varsha_slack
+            - echo "test"
       
       - name: mvn_build_scan
         type: XrayScan
         configuration:
           nodePool: ubuntu16
-          #waitUntilFinish: false
           inputResources:
-            - name: mvnBuild_info  
+            - name: maven 
           outputResources:
             - name: mvnBuild_infoScaned
                 
