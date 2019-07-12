@@ -127,7 +127,7 @@ pipelines:
           inputResources:
             - name: maven #required
           outputResources:
-            - name: maven_info
+            - name: maven_promoted
             
       - name: mvn_release_bundle_unsigned
         type: CreateReleaseBundle
