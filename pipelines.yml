@@ -61,7 +61,7 @@ pipelines:
   - name: maven_vijay
     steps:
             
-      - name: mavenvnBuild
+      - name: mavenBuild
         type: MvnBuild
         configuration:
           nodePool: ubuntu16
@@ -100,7 +100,7 @@ pipelines:
         configuration:
           nodePool: ubuntu16
           inputSteps:
-            - name: mavenBuild_sample
+            - name: mavenBuild
           outputResources:
             - name: maven
         execution:
@@ -114,7 +114,7 @@ pipelines:
           inputResources:
             - name: maven 
           outputResources:
-            - name: mavenBuild_info
+            - name: maven_info
                 
       - name: mvn_build_promote
         type: PromoteBuild
