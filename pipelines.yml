@@ -59,8 +59,7 @@ resources:
 pipelines:
             
   - name: maven_vijay
-    steps:
-            
+    steps:      
       - name: mavenBuild
         type: MvnBuild
         configuration:
@@ -70,7 +69,7 @@ pipelines:
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
-            - name: mvn_repo1
+            - name: maven_repo
           integrations:
             - name: art
           runtime:            
