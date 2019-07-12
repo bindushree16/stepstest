@@ -10,21 +10,21 @@ resources:
   - name: maven
     type: BuildInfo
     configuration:
-      sourceArtifactory: art
+      sourceArtifactory: varsha_artifactory
       buildName: maven
       buildNumber: 9
       
   - name: maven_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: art
+      sourceArtifactory: varsha_artifactory
       buildName: maven_scan
       buildNumber: 2
       
   - name: maven_promoted
     type: BuildInfo
     configuration:
-      sourceArtifactory: art
+      sourceArtifactory: varsha_artifactory
       buildName: maven_promote
       buildNumber: 3
       
@@ -71,7 +71,7 @@ pipelines:
           inputResources:
             - name: maven_repo
           integrations:
-            - name: art
+            - name: varsha_artifactory
           runtime:            
             type: image
             image:
