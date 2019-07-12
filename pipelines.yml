@@ -155,7 +155,7 @@ pipelines:
             
      - name: mvn_distribute_signed_release
        type: DistributeReleaseBundle
-    #    configuration:
+       configuration:
          nodePool: ubuntu16
          inputResources:
            - name: signed_maven_release
