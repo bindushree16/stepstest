@@ -1,144 +1,31 @@
 resources:
-  - name: artifactory_go1
+  - name: rhel7_test 
     type: GitRepo
     configuration:
-      path: bindushree16/artifactory-go-example
-      branches:
-        include: master
+      path: bindushree16/stepstest
+#       branches:
+#         include: master
       gitProvider: bindu_github
       
-  - name: go_build_info1
-    type: BuildInfo
+  - name: rhel
+    type: Bash
     configuration:
-      sourceArtifactory: art
-      buildName: go_example_build
-      buildNumber: 1
-      
-  - name: unsigned_release_bundle_go1
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: dist 
-      name: go_test_bundle
-      version: v1.16
-      
-  - name: signed_release_bundle_go1
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: dist 
-      name: go_test_bundle
-      version: v1.16
-      
-  - name: promoted_go_build1
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: art 
-      buildName: promote_go_build_publish
-      buildNumber: 1
-      
-  - name: distribution_rule_go1
-    type: DistributionRule
-    configuration:
-      sourceDistribution: dist
-      cityName: "*"
-      serviceName: "*"
-      siteName: "*"
-      countryCodes:
-        - CN      
-
-
-
-pipelines:
-  - name: go_build1
-    configuration:   
-      runtime:       
+      nodePool: node-RHEL-7
+      inputResources:
+        - name: rhel7_test
+      runtime:
         type: image
         image:
-          custom:
-            name: bindu166/c7cpp
-            tag: cpptest
-            options: " "   
-    steps:
-      - name: build_go
-        type: GoBuild
-        configuration:
-          nodePool: ubuntu16
-          sourceLocation: .
-          repository: test-go-local
-          outputLocation: tmp
-          outputFile: bindu_go
-          inputResources:
-            - name: artifactory_go1
-          integrations:
-            - name: art
-        execution:
-          onStart:
-            - wget https://dl.google.com/go/go1.12.5.linux-amd64.tar.gz
-            - sudo tar -C /usr/local -xzf go1.12.5.linux-amd64.tar.gz
-            - export PATH=$PATH:/usr/local/go/bin
-            - go version  
-            - jfrog --version
-            
-      - name: publish_go_binary
-        type: GoPublishBinary
-        configuration:
-          nodePool: ubuntu16        
-          inputSteps:
-            - name: build_go
-          targetRepository: test-go-local
-          integrations:
-            - name: art    
-
-      - name: publish_build
-        type: PublishBuildInfo
-        configuration:
-          nodePool: ubuntu16        
-          inputSteps:
-            - name: publish_go_binary
-          outputResources:
-            - name: go_build_info1
-            
-      - name: promote_build_go
-        type: PromoteBuild
-        configuration:
-          nodePool: ubuntu16        
-          targetRepository: promote-test
-          integrations:
-            - name: art
-          inputResources:
-            - name: go_build_info1
-          outputResources:
-            - name: promoted_go_build1
-            
-      - name: bundle_go_publish
-        type: CreateReleaseBundle
-        configuration:
-          nodePool: ubuntu16        
-          dryRun: false
-          description: "This is to test GoBuild -> PushArtifactoryPackage -> PublishBuildInfo -> Promote -> CreateRelease -> Sign -> Distribute pipeline chain"
-          releaseBundleName: go_publish_test_build
-          releaseBundleVersion: v1.0.3
-          sign: false
-          inputResources:
-            - name: promoted_go_build1
-          outputResources:
-            - name: unsigned_release_bundle_go1
-            
-      - name: sign_release_bundle_go
-        type: SignReleaseBundle
-        configuration:
-          inputResources:
-            - name: unsigned_release_bundle_go1
-          outputResources:
-            - name: signed_release_bundle_go1
-            
-      - name: distribute_signed_release_bundle
-        type: DistributeReleaseBundle
-        configuration:
-          dryRun: false
-          inputResources:
-            - name: signed_release_bundle_go1
-            - name: distribution_rule_go1
-          integrations: 
-            - name: dist          
-            
+          auto:
+            language: nodejs
+            versions:
+              - 10.15.3
+          #custom:
+         #  name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
+         #  tag: 0.9.0 #master #
+    execution:
+      onExecute:
+        - printenv
+        - node --version
+        - docker images
             
