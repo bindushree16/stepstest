@@ -6,26 +6,30 @@ resources:
 #       branches:
 #         include: master
       gitProvider: bindu_github
-      
-  - name: rhel
-    type: Bash
-    configuration:
-      nodePool: node-RHEL-7
-      inputResources:
-        - name: rhel7_test
-      runtime:
-        type: image
-        image:
-          auto:
-            language: nodejs
-            versions:
-              - 10.15.3
-          #custom:
-         #  name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
-         #  tag: 0.9.0 #master #
-    execution:
-      onExecute:
-        - printenv
-        - node --version
-        - docker images
+  
+pipelines:
+  - name: pipe1
+    steps: 
+      - name: rhel
+        type: Bash
+        configuration:
+          nodePool: node-RHEL-7
+          inputResources:
+            - name: rhel7_test
+          runtime:
+            type: image
+            image:
+              auto:
+                language: nodejs
+                versions:
+                  - 10.15.3
+                    #custom:
+              #  name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
+              #  tag: 0.9.0 #master #
+        execution:
+          onExecute:
+            - printenv
+            - node --version
+            - docker images
+  
             
