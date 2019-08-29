@@ -13,23 +13,23 @@ pipelines:
       - name: rhel
         type: Bash
         configuration:
-#           nodePool: node-RHEL-7
+          nodePool: node-RHEL-7
           inputResources:
             - name: rhel7_test
           runtime:
             type: image
             image:
-#               auto:
-#                 language: nodejs
-#                 versions:
-#                   - 10.15.3
-              custom:
-                name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
-                tag: 0.9.1 #master #
+              auto:
+                language: nodejs
+                versions:
+                  - 10.15.3
+#               custom:
+#                 name: pipelines-docker.jfrog.io/jfrog/pipelines-u16go
+#                 tag: 0.9.1 #master #
         execution:
           onExecute:
             - printenv
-            - node --version
+#             - node --version
             - docker images
   
             
